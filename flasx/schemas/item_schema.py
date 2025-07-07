@@ -1,9 +1,41 @@
 import decimal
-from pydantic import BaseModel
-from . import receiver_schema
+import datetime
+from pydantic import BaseModel, Field
+
+from . import customer_schema
 
 
 class Item(BaseModel):
-    name: str
-    delivery_price: decimal.Decimal = 0.0
-    receiver: receiver_schema.Receiver
+    weight: float = 0.0
+    service_price: decimal.Decimal = 0.0
+    # receiver: receiver_schema.Receiver | None = Noneimport decimal
+import datetime
+from typing import Optional
+from pydantic import BaseModel, Field
+
+from . import receiver_schema
+
+
+class ItemBase(BaseModel):
+    weight: float = 0.0
+    service_price: decimal.Decimal = 0.0
+
+
+class ItemCreate(ItemBase):
+    customer_id: Optional[int] = None
+
+
+class ItemUpdate(BaseModel):
+    weight: Optional[float] = None
+    service_price: Optional[decimal.Decimal] = None
+    customer_id: Optional[int] = None
+
+
+class Item(ItemBase):
+    id: Optional[int] = None
+    created_at: Optional[datetime.datetime] = None
+    updated_at: Optional[datetime.datetime] = None
+    customer_id: Optional[int] = None
+
+    class Config:
+        from_attributes = True
