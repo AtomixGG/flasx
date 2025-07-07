@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 class CustomerBase(SQLModel):
     name: str = Field(index=True)
     email: str = Field(unique=True, index=True)
-    phone: Optional[str] = None
+    phone: str | None = None
     address: Optional[str] = None
     is_active: bool = Field(default=True)
 
