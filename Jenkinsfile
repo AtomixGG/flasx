@@ -14,7 +14,7 @@ pipeline {
                 stage('Unit Tests') {
                     steps {
                         echo 'Running unit tests...'
-                        sh 'sleep 5'
+                        sh 'exit 1'
                     }
                 }
                 stage('Integration Tests') {
